@@ -7,7 +7,34 @@
  */
 
 employeeApp.service('employeeService', function ($http) {
-    this.get = function () {
-        return $http.get("/Employee/Get");
+
+    // Obter todos os funcionários
+    this.Get = function () {
+        return $http.get("/employee/get");
     }
+
+    // Adicionar funcionário
+    this.Add = function (employee) {
+
+        var request = $http({
+            method: 'POST',
+            url: '/employee/add',
+            data: employee
+        });
+
+        return request;
+    }
+
+    // Atualizar funcionário por ID
+    this.Update = function (employee) {
+
+        var request = $http({
+            method: 'POST',
+            url: '/employee/update',
+            data: employee
+        });
+
+        return request;
+    }
+
 });
