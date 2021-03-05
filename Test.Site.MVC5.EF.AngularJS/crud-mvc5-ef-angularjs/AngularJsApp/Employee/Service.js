@@ -37,4 +37,9 @@ employeeApp.service('employeeService', function ($http) {
         return request;
     }
 
+    // Deletar funcionário por ID
+    this.Delete = function (id) {
+        return $http.post('/employee/delete/' + id);
+    }
+
 });

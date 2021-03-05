@@ -93,7 +93,28 @@ employeeApp.controller('employeeCtrl', function ($scope, employeeService) {
                 alert('Funcionário não atualizado');
             }
         }, function () {
-            alert('Ocorreu um erro ao tentar o funcionário');
+            alert('Ocorreu um erro ao tentar atualizar o funcionário');
         });
     }
+
+    $scope.deleteEmployeeById = function (employee) {
+        $scope.id = employee.Id;
+        $scope.name = employee.Name;
+    }
+
+    // Remover funcionário pelo ID
+    $scope.deleteEmployee = function (id) {
+        var deleteInfos = employeeService.Delete($scope.id);
+        deleteInfos.then(function (d) {
+            if (d.data.success === true) {
+                loadEmployees();
+                alert('Funcionário excluído com sucesso');
+            } else {
+                alert('Funcionário não excluído')
+            }
+        }, function () {
+            alert('Ocorreu um erro ao tentar excluir o funcionário');
+        });
+    }
+
 });

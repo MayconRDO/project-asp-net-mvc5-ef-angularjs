@@ -69,8 +69,31 @@ namespace crud_mvc5_ef_angularjs.Controllers
 
                     return Json(new { success = true });
                 }
-            }            
+            }
         }
 
+        /// <summary>
+        /// Remover funcionário por Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            using (var db = new EmployeesEntities())
+            {
+                var employee = db.Employees.Find(id);
+
+                if (employee == null)
+                {
+                    return Json(new { success = false });
+                }
+
+                db.Employees.Remove(employee);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+        }
     }
 }
